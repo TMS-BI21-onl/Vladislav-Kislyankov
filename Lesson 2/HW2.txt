@@ -1,0 +1,48 @@
+Exercise 1
+
+a.) USE AdventureWorks2017
+Select *
+From Sales.SalesTerritory
+
+b.) Select TerritoryID, Name 
+From Sales.SalesTerritory
+
+c.) Select *
+From Person.Person
+Where LastName = 'Normal'
+
+d.) Select *
+From Person.Person
+Where EmailPromotion != 2
+
+Exercise 3
+
+GROUPING - Указывает, является ли указанное выражение столбца в списке GROUP BY статистическим или нет.
+STDEV - Возвращает статистическое стандартное отклонение всех значений в указанном выражении.
+APPROX_COUNT_DISTINCT - Возвращает приблизительное количество уникальных значений, не равных NULL, в группе
+
+Exercise 4
+
+a.) Select Distinct PersonType
+From Person.Person
+Where LastName Like 'M%' OR EmailPromotion != 1
+
+b.) Select TOP 3 *
+From Sales.SpecialOffer
+Where StartDate BETWEEN '2013-01-01' AND '2014-01-01'
+ORDER BY DiscountPct DESC
+
+c.) Select MIN(Weight) AS MinWeight
+	, MAX(Size) AS MaxSize
+From Production.Product
+
+d.) Select  ProductSubcategoryID, MIN(Weight) AS MinWeight
+	, MAX(Size) AS MaxSize
+From Production.Product
+Group By ProductSubcategoryID
+
+e.)Select  ProductSubcategoryID, MIN(Weight) AS MinWeight
+	, MAX(Size) AS MaxSize
+From Production.Product
+Where Color Is Not Null
+Group By ProductSubcategoryID
