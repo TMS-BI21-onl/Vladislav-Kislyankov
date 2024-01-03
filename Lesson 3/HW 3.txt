@@ -1,0 +1,42 @@
+Open question: Tried to use the different options for naming our columns(pv;ppv; started with table name). What option is more correct?
+
+Task 2
+
+a.) Select StandardCost, 
+CASE When StandardCost = 0 OR StandardCost IS NULL Then 'Not for sale'
+When StandardCost > 0 AND StandardCost < 100 Then '<$100'
+When StandardCost > 100 AND StandardCost < 500 Then '<$500'
+Else '>= $500'
+End as PriceRange
+From Production.Product
+
+b.)Select pv.Name, ppv.AverageLeadTime, ppv.ProductID, ppv.StandardPrice
+From Purchasing.ProductVendor ppv
+Join Purchasing.Vendor pv ON ppv.BusinessEntityID= pv.BusinessEntityID
+Where ppv.StandardPrice > 10 and pv.Name Like 'N%' OR pv.Name Like '%X%'
+
+c.) Select Distinct pv.Name
+From Purchasing.ProductVendor ppv
+Left Join Purchasing.Vendor pv ON ppv.BusinessEntityID= pv.BusinessEntityID
+Where ppv.OnOrderQty is NULL
+
+Task 3
+
+a.) Select Production.Product.[Name], Production.Product.[ListPrice]
+From Production.Product
+Join Production.ProductModel ON Production.Product.[ProductModelID] = Production.ProductModel.[ProductModelID]
+Where Production.Product.[Name] LIKE 'LL%'
+
+b.) Select Name
+From Purchasing.Vendor
+Union
+Select Name
+From Sales.Store
+Order by Name
+
+c.) Select Production.Product.[Name], Count(Sales.SpecialOffer.[SpecialOfferID]) as Total_Offers
+From Production.Product
+Join Sales.SpecialOfferProduct On Production.Product.[ProductID]= Sales.SpecialOfferProduct.[ProductID]
+Join Sales.SpecialOffer On Sales.SpecialOfferProduct.[SpecialOfferID]= Sales.SpecialOffer.[SpecialOfferID]
+Group By Production.Product.[Name]
+Having  Count(Sales.SpecialOffer.[SpecialOfferID])>1
