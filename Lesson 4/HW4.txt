@@ -1,0 +1,67 @@
+3. All values in ORDER BY clause column are uniqued
+4. 
+a) UnitMeasureCode, starting with letter ‘Т’- No
+
+Select UnitMeasureCode
+From Production.UnitMeasure
+Where UnitMeasureCode like 'T%'
+
+How much different code does the table has?- 38
+
+Select Distinct UnitMeasureCode
+From Production.UnitMeasure
+
+Added new values 
+
+Insert Into Production.UnitMeasure (UnitMeasureCode,Name, ModifiedDate)
+Values ('TT1' ,'Test 1', '2020-09-09'), ('TT2', 'Test 2', getdate() )
+
+Checked out UnitMeasureCode
+
+Select UnitMeasureCode
+From Production.UnitMeasure
+Where UnitMeasureCode like 'T%'
+
+b.)Select UnitMeasureCode, Name, ModifiedDate
+Into Production.UnitMeasureTest
+From Production.UnitMeasure
+Where UnitMeasureCode like 'T%'
+
+Insert Into Production.UnitMeasureTest
+Select UnitMeasureCode, Name, ModifiedDate
+From Production.UnitMeasure
+Where UnitMeasureCode='CAN'
+
+Select UnitMeasureCode
+From Production.UnitMeasureTest
+ORDER BY UnitMeasureCode
+
+c.)Update Production.UnitMeasureTest
+Set UnitMeasureCode= 'TTT'
+
+d.) Delete
+From Production.UnitMeasureTest
+
+e.)Select SalesOrderID, SalesOrderDetailID ,LineTotal,
+AVG(LineTotal) Over () as Average,
+MAX(LineTotal) Over () as Maximum,
+MIN (LineTotal) Over () as Minimum
+From Sales.SalesOrderDetail 
+Where SalesOrderID = '43659' or SalesOrderID ='43664'
+
+f.)Top sales have been graged 
+
+Select FirstName,LastName,SalesYTD,
+DENSE_RANK() Over (Order by SalesYTD Desc) as Top_Sales
+From Sales.vSalesPerson
+
+Added new column
+
+Select FirstName,LastName,SalesYTD,
+DENSE_RANK() Over (Order by SalesYTD Desc) as Top_Sales,
+CONCAT((LEFT(LastName,3)),'login', ISNULL (TerritoryGroup,'')) AS Login
+From Sales.vSalesPerson
+
+g.) Select Dateadd(MONTH,datediff(MONTH,0,GetDate()),0)
+
+5.) count(1)-4, count(name)-2, count(id)-4, count(*)-4
