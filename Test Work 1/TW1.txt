@@ -1,0 +1,26 @@
+1. Select Seniority, Residence
+From Driver 
+Where Seniority not in ('3', '5','6','10') and Residence like 'eee'
+
+2. Select № паспорта в, ФИО водителя в
+From водители в
+Left Join диспетчерская д ON код водителя в= код водителя д
+Where путевка=0
+
+3. Select рег номер авто а, время прибытия,время отбытия, пункт назначения
+From автомобили а
+JOIN диспетчерская д ON код авто а= код авто д
+JOIN маршрут м ON путевка д = код маршрута м
+Where год выпуска авто = '2015'
+
+EX2
+
+2.
+Select a.first_name, a.department, a.salary
+From a.Employees
+Left Join Department ON a.department= b.department
+Where a.Salary.....
+
+
+4) SELECT TOP 3 LEN(first_name) as number_of_letters 
+FROM Customers
