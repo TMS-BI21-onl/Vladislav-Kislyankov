@@ -1,0 +1,7 @@
+Well done!
+
+4.e
+PARTITION BY SalesOrderID is needed.
+
+4.g
+It's first day of the month, not first working day. Try June 2024 or October 2023.
