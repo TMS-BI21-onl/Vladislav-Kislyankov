@@ -1,0 +1,63 @@
+ex1
+CREATE TABLE Patients 
+(
+    ID		        INT identity(1,1) PRIMARY KEY, 
+    first_name		NVARCHAR(100), 
+    last_name		NVARCHAR(100),
+	SSN             NVARCHAR(10) UNIQUE,
+	Email           AS UPPER(LEFT(first_name,1))+LOWER(LEFT(last_name,3)) +'@mail.com',
+	Temp            DECIMAL(5,2),
+    created_date    DATE
+	)
+ex.2
+Insert into Patients (first_name,last_name,SSN,Temp,created_date)
+Values 
+(N'Adam', N'Cucude','12345','37.2','1999-07-16'),
+(N'Dima',N'Vacale','13243','36.2','2012-08-22'),
+(N'Vlad', N'Asexute','12453','38.4','1982-04-12')
+
+ex.3
+Alter Table Patients
+ADD TempType text
+
+Update Patients
+SET temptype= '< 37°C' 
+Where Temp< 37
+
+Update Patients
+SET temptype= '> 37°C' 
+Where Temp>= 37
+
+ex.4
+Create view Patients_v
+AS Select first_name,last_name,Temp*9/5 + 32 as TempF
+From Patients
+
+Select *
+From Patients_v
+
+ex.5
+Create function return_temp
+(@Temp DECIMAL(5,2) ) RETURNS INT
+Begin
+RETURN @Temp*9/5 + 32;
+END;
+
+ex.6
+I will try to make it correctly, not simplier)) . Its difficalt for me.... I have never worked with this functions. But going to step by step increase my knowledge
+Can we please pay more attention to this?maybe we can do some more exercises((
+Copy the last correct option(from hw4)
+
+Select DATEADD(DAY,1,EOMONTH(GETDATE(),-1)) AS firstday,
+DATEPART(DW,DATEADD(DAY,1,EOMONTH(GETDATE(),-1))) AS NUMBER,
+CASE WHEN DATEPART(DW,DATEADD(DAY,1,EOMONTH(GETDATE(),-1))) <=5
+THEN DATEADD(DAY,1,EOMONTH(GETDATE(),-1))
+ELSE DATEADD(DAY,(7-DATEPART(DW,DATEADD(DAY,1,EOMONTH(GETDATE(),-1)))+1),DATEADD(DAY,1,EOMONTH(GETDATE(),-1)))
+END AS FIRSTWORKDAY
+
+ex.7
+SELECT T1.FIRST_NAME
+       ,CASE WHEN T2.EMPLOYEE_ID IS NULL THEN 'Currently Working'
+	ELSE CONCAT('Left the company at',' ',T2.END_DATE) END AS STATUS
+FROM EMPLOYEES T1
+JOIN JOB_HISTORY T2 ON T1.EMPLOYEE_ID = T2.EMPLOYEE_ID
