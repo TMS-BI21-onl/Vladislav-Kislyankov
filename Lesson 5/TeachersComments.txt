@@ -1,0 +1,8 @@
+Well done!
+
+6
+Unfortunately, we won't do any excercises on analytical functions, because there is no point in learning all functions that CAN POSSIBLY BE USEFUL. As long as you constantly write sql code, you google it and leart it naturally.
+It's fine if you don't know them by heart right now :)
+
+7
+And what if employee has worked in multiple departments? Each row in job history will give us "left the company" row, which is not correct.
