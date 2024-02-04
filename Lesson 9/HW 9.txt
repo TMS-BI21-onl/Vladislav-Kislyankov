@@ -1,0 +1,8 @@
+Дана таблица людей People. Поля: ID, FirstName, LastName,  ID_Father, ID_Mother.
+Для всех Дмитриев выведите их ФИО и ФИО их отцов.
+
+
+SELECT p1.FirstName, p1.LastName, p2.FatherFirstName, p2.FatherLastName
+FROM People p1
+JOIN Father p2 ON p1.ID_Father = p2.ID_Father
+WHERE p1.FirstName = 'Дмитрий'
