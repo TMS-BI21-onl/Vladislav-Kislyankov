@@ -1,0 +1,13 @@
+1 step- downloaded 1000 random rows
+2 step- create new table, where I want to merge data
+CREATE TABLE NewPeople (
+    ID int identity(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL
+3 step- apply cross join 1000*1000 rows
+INSERT INTO NewPeople (FirstName, LastName)
+     SELECT TOP 1000000
+            t1.first_name,
+            t2.last_name
+       FROM MOCK_DATA t1
+ CROSS JOIN MOCK_DATA t2;
