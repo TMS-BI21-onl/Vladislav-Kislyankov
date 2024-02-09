@@ -1,0 +1,15 @@
+SSELECT Year , [January], [February], [December]
+FROM  
+(
+	Select SUM (OrderQty)		AS SumOrder
+	,year(DueDate)		AS Year
+	,DateName(month,DueDate)	AS Month
+	from Production.WorkOrder
+	Where DateName(month,DueDate) in ('January','February','December')
+	Group BY year(DueDate), DateName(month,DueDate)
+)  source  
+PIVOT  
+(  
+ SUM(SumOrder)
+ FOR Month IN ([January], [February],[December])  
+) AS PivotTable; 
