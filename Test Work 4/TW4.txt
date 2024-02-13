@@ -1,0 +1,39 @@
+3
+Select top 1 With TIES Price, name
+From product 
+order by price DESC 
+
+Select name, price
+From product
+Where price= (Select MAX(price) from product)
+
+Select*
+ from (Select name, MAX(price) OVER as max.price
+From Product) T
+Where Price= max.price
+
+Select *
+From (Select name, price, RANK () Over (ORDER BY price DESC)as rnk
+where rnk=1
+
+4 
+Select a.name,b.name,b.age
+from phone a
+join user b ON a.id user=b.id user
+where name LIKE '+3%4' or age > 35
+
+1
+Insert Into manifacturer (name, country id)
+Values (HP,2)
+ALTER TABLE manifacturer ADD FOREIGN KEY (`country id`) REFERENCES country id(`id`);
+
+2.
+UPDATE user SET age=18/3 WHERE id=4
+
+5.
+SELECT top 5 Count(ID продукта), c.name 
+FROM order s 
+JOIN user c ON s.ID_user = c.ID_user 
+GROUP BY c.name 
+Order by Count(ID продукта) DESC
+
