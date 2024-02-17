@@ -1,0 +1,10 @@
+Create view TOP50Users AS
+Select Top 50 FirstName,LastName,
+CASE When COUNT(TicketID) >= 10 Then '3'
+When COUNT(TicketID) BETWEEN 5 AND 9  Then '2'
+ELSE 1
+End as Mark
+From Tickets a
+Join Passengers b ON a.PassengerID=b.PassengerID
+group by FirstName,LastName
+order by Mark DESC
