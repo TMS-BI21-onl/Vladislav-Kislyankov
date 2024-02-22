@@ -1,0 +1,50 @@
+1. Найти ProductSubcategoryID из Production.Product, где мин вес такого ProductSubcategoryID больше 150. 
+
+SELECT productsubcategoryid, Min(Weight) as result
+FROM production.product
+GROUP BY productsubcategoryid
+HAVING MIN(Weight) > 150 and ProductSubcategoryID Is not NULL
+
+
+2. Найти самый дорогой продукт (поле StandardCost) из Production.Product. (4 способа)
+через топ 1
+через подзаппрос с where
+через ранжирующую функцию rank
+через оконную функцию MAX
+
+3. Найти клиентов, которые за последний год не совершили ни одного заказа (схема GROUP2)
+
+Select firstname, lastname 
+From client a
+join order b ON a.client.id=b.client
+where orderdate> DATEADD(year,-1,Getdate()) and order id is NULL
+
+4. Найти для каждого поставщика кол-во заказов за последние 5 лет.  (схема GROUP2)
+
+Select Name, COUNT(Order_id) as cnt
+From order a
+join vendor b ON a. vendor_id=b.vendor_id
+where orderdate> DATEADD(year,-5,Getdate())
+group by Name
+
+5. 
+Users (
+    id bigint NOT NULL,
+    email varchar(255) NOT NULL
+);
+
+Notifications (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    category varchar(100),
+    is_read boolean DEFAULT false
+);
+
+Найти список категорий для пользователя alex@gmail.com, в которых более 50 непрочитанных нотификаций
+
+SELECT n.category, COUNT(n.id) as Result
+FROM users u
+JOIN notifications n ON u.id = n.user_id
+WHERE u.email = 'alex@gmail.com' AND n.is_read = false
+GROUP BY n.category
+HAVING COUNT(n.id) > 50
