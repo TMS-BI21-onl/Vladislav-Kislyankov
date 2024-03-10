@@ -1,0 +1,36 @@
+1. Select First_name, Last_name
+From Employees
+Where Employee_id IN 
+(Select Manager_id, Count(Employee_id) as cei
+From Employees 
+Group By manager_ID
+Having Count(Employee_id) >6 ) t
+2. 
+SELECT b.Department_name,
+	MIN(Salary*((100-Commission_pct)/100))) Over by (Partition by Department_id ) AS min_salary,
+	MAX(Salary*((100-Commission_pct)/100))) Over by (Partition by Department_id ) AS max_salary
+FROM Employees a
+	JOIN Departments b ON a.Department_id = b.Department_id
+3. 
+Select TOP 1 t.Region_name
+From (
+	Select
+		e.Region_name, 
+		COUNT(a.Employees_id) AS cnt
+	From Employees a
+		JOIN Departments b ON a.department_id = b.department_id
+		JOIN Location c ON b.Location_id = c.Locationt_id
+		JOIN Countries d ON c.country_id = d.country_id
+		JOIN Regions e ON e.Region_id = d.Region_id
+	GROUP BY e.Region_name
+4. I did not understand which formulas I need to use in task....
+5
+Select *
+From (Select e. First_name, e.Last_name, DATEDIFF(year,End_date,Start_date) AS distance 
+From Employees e
+Join Job_History j ON e. Employees= j. Employees ) t
+Where distance > 10
+6. 
+Select First_name, Last_name, DENSE_RANK() OVER (ORDER BY Salary DESC) AS Rating
+From Employees
+Where Rating BETWEEN 5 AND 10
